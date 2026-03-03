@@ -1,0 +1,4 @@
+Một số cách dùng DSU
+1. Tìm số thành phần liên thông / kiếm tra 2 nhóm có thuộc cùng một phần liên thông
+2. Truy vấn offline (kế thừa), rồi loang dần
+3. Bỏ qua những nhóm đã xét, vd : tìm vị trí gần l nhất chưa được xử lý
