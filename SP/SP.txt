@@ -1,0 +1,15 @@
+Spanning Tree (Cây khung nhỏ nhất)
+Cây khung là một cây không chứa chu trình và liên thông
+Cây khung nhỏ nhất là cây khung sao cho tổng trọng số các cạnh bé nhất
+Tương tự cây khung lớn nhất
+Lưu ý : đúng với đồ thị vô hướng
+
+Tính chất:
+    1. 
+    2. Trên cây khung nhỏ nhất, nếu w là lớn nhất của đường đi từ u -> v, thì trong đồ thị ban đầu không có đường đi nào từ u -> v bé hơn w.
+    3. 
+    4. 
+
+Một số cách sử dụng:
+    1. Tìm MST
+    2. Tạo đỉnh ảo, rồi MST
