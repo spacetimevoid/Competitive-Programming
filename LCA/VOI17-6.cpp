@@ -4,42 +4,35 @@ using namespace std;
 
 #define NAME "UNIMST"
 #define int long long
-const int N = 2e5 + 5;
+const int N = 3e5 + 5;
 const int LOG = 20;
 const int INF = 1e9;
 
-/*
-cho đồ thị liên thông n đỉnh, m cạnh (<= 2e5)
-giá trị của đường đi từ u -> v là trọng số của cạnh lớn nhất
-Ta có thể thực hiện thao tác tăng một cạnh lên số +1 vô hạn lần
-Tìm số lần thực hiện thao tác ít nhất sao cho có duy nhật 1 đường đi có giá trị bé nhất từ u -> v
-
-Ý tưởng: Tính chất số 1, 2 của cây khung nhỏ nhất
-    - tạo cây khung nhỏ nhất (chính là đường đi có giá trị nhỏ nhất từ u -> v)
-    - nếu cạnh u, v, w không có trong cây khung
-        -> nếu w = giá trị u -> v trong cây khung thì tăng cạnh đó lên
-    
-    (Sử dụng lca để tối ưu việc tìm trọng số lớn nhất trên cây (LUBENICA))
-*/
-
 struct edge{
-    int u, v, w;
+    int u, v, w, id;
 };
 
 bool cmp(edge x, edge y){
-    return x.w < y.w;
+    return x.w > y.w;
 }
+
+/*
+cho n đỉnh và m cạnh (không nhất thiết liên thông) (<= 1e5)
+tìm chu trình có max + min cạnh lớn nhất
+
+Ý tưởng: sử dụng tính chất 2 cây khung lớn nhất
+    lấy cạnh không thuộc cây khung + cạnh lớn nhất thuộc cây khung
+*/
 
 int n, m;
 int lab[N];
-int mx_edge = 0;
-bool mark[N];
+bool mark[N], vis[N];
 vector<edge> g;
 vector<pair<int, int>> p[N];
-
 int h[N], parent[N][LOG + 5], mx[N][LOG + 5];
 
 void dfs(int u, int par){
+    vis[u] = true;
     for(auto [v, w] : p[u]){
         if(v == par) continue;
         h[v] = h[u] + 1;
@@ -51,7 +44,9 @@ void dfs(int u, int par){
 
 void init(){
     parent[1][0] = 0;
-    dfs(1, -1);
+    for(int i = 1; i <= n; i++)
+        if(!vis[i])
+            dfs(i, -1);
     for(int j = 1; j <= LOG; j++){
         for(int i = 1; i <= n; i++){
             parent[i][j] = parent[parent[i][j - 1]][j - 1];
@@ -64,7 +59,7 @@ int lca(int u, int v){
     if(h[u] < h[v]) swap(u, v);
     
     int g = h[u] - h[v];
-    int MX = 0, MI = LLONG_MAX;
+    int MX = 0;
     for(int i = LOG; i >= 0; i--){
         if(g >= (1 << i)){
             MX = max(MX, mx[u][i]);
@@ -92,7 +87,7 @@ int findset(int u){
     return lab[u] < 0 ? u : lab[u] = findset(lab[u]);
 }
 
-void unionset(int u, int v){
+void unionset(int u, int v, int w){
     if(lab[u] > lab[v]) swap(u, v);
     lab[u] += lab[v];
     lab[v] = u;
@@ -104,7 +99,7 @@ void solve()
     cin >> n >> m;
     for(int i = 1; i <= m; i++){
         int u, v, w; cin >> u >> v >> w;
-        g.push_back({u, v, w});
+        g.push_back({u, v, w, i});
     }
 
     sort(g.begin(), g.end(), cmp);
@@ -113,7 +108,7 @@ void solve()
         int u = g[i].u, 
             v = g[i].v;
         if(findset(u) != findset(v)){
-            unionset(findset(u), findset(v));
+            unionset(findset(u), findset(v), g[i].w);
             p[u].push_back({v, g[i].w});
             p[v].push_back({u, g[i].w});
             mark[i] = true;
@@ -125,7 +120,8 @@ void solve()
     int ans = 0;
     for(int i = 0; i < g.size(); i++){
         if(mark[i]) continue;
-        if(lca(g[i].u, g[i].v) == g[i].w) ans++;
+        int x = lca(g[i].u, g[i].v);
+        ans = max(ans, x + g[i].w);
     }
 
     cout << ans;

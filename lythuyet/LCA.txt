@@ -1,5 +1,7 @@
 LCA : tổ tiên chung gần nhất
-Lưu ý: LCA chỉ dùng được trên cây
+Lưu ý:
+    - LCA chỉ dùng được trên cây
+    - Đồ thị có thể không liên thông nên phải DFS mọi đỉnh
 
 Ứng dụng:
     1. Tính khoảng cách giữa 2 đỉnh dist[u] + dist[v] - 2 * dist[lca(u, v)]

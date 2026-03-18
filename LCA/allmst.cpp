@@ -109,10 +109,10 @@ void solve()
     sort(g.begin(), g.end(), cmp);
 
     for(int i = 0; i < g.size(); i++){
-        int u = findset(g[i].u),
-            v = findset(g[i].v);
-        if(u != v){
-            unionset(u, v, g[i].w);
+        int u = g[i].u, 
+            v = g[i].v;
+        if(findset(u) != findset(v)){
+            unionset(findset(u), findset(v), g[i].w);
             p[u].push_back({v, g[i].w});
             p[v].push_back({u, g[i].w});
             mark[i] = true;

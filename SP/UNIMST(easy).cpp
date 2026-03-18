@@ -68,10 +68,10 @@ void solve()
     sort(adj.begin(), adj.end(), cmp);
 
     for(int i = 0; i < adj.size(); i++){
-        int u = findset(adj[i].u),
-            v = findset(adj[i].v);
-        if(u != v){
-            unionset(u, v);
+        int u = adj[i].u, 
+            v = adj[i].v;
+        if(findset(u) != findset(v)){
+            unionset(findset(u), findset(v));
             p[u].push_back({v, adj[i].w});
             p[v].push_back({u, adj[i].w});
             mark[i] = true;
