@@ -1,0 +1,12 @@
+LCA : tổ tiên chung gần nhất
+Lưu ý: LCA chỉ dùng được trên cây
+
+Ứng dụng:
+    1. Tính khoảng cách giữa 2 đỉnh dist[u] + dist[v] - 2 * dist[lca(u, v)]
+        - PTWALK
+    2. Tính số lần mỗi cạnh được đi qua (offline)
+        - KBUILD
+    3. Tìm trọng số lớn nhất trên đường đi từ u đến v
+        - LUBENICA
+        - UNIMST
+        - Allmst
