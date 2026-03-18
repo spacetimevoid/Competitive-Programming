@@ -1,0 +1,6 @@
+Cây trong đồ thị
+- Đường kính của cây là khoảng cách 2 đỉnh xa nhau nhất
+    Cách tìm:
+        - Chọn đỉnh x bất kì, đỉnh u là đỉnh xa x nhất
+        - Đỉnh v là đỉnh xa u nhất
+    -> độ dài đường kính là khoảng cách u, v

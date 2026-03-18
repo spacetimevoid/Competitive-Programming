@@ -8,7 +8,8 @@ const int N = 2e5 + 5;
 const int INF = 1e9;
 
 /* 
-    Trọng số lớn nhất trong cây khung bé nhất
+Sử dụng tính chất số 2 của cây khung nhỏ nhất
+Trọng số lớn nhất trong cây khung bé nhất
 */
 
 struct edge{

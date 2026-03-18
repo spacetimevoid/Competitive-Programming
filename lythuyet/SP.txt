@@ -1,8 +1,8 @@
 Spanning Tree (Cây khung nhỏ nhất)
+Lưu ý : đúng với đồ thị vô hướng
 Cây khung là một cây không chứa chu trình và liên thông
 Cây khung nhỏ nhất là cây khung sao cho tổng trọng số các cạnh bé nhất
 Tương tự cây khung lớn nhất
-Lưu ý : đúng với đồ thị vô hướng
 
 Tính chất:
     1. Nếu một cạnh là lớn nhất trong một chu trình, thì cạnh đó chắc chắn không nằm trong MST.
@@ -13,3 +13,8 @@ Tính chất:
 Một số cách sử dụng:
     1. Tìm MST
     2. Tạo đỉnh ảo, rồi MST
+    3. Sửa cạnh trong cây khung ban đầu
+        - CHONDUONG
+        - UNIMST
+        - ALLMST
+    4. Cạnh u -> v có thuộc MST nào không
